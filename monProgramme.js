@@ -38,7 +38,6 @@ class Sort {
     }
     
     duplicateArray(numbersArray) {
-      //Shallow copy
       return [...numbersArray];
     }
     
@@ -74,7 +73,6 @@ class Sort {
         isSorted = true;
         for (let j = 1; j < this._numbersArray.length - i; j++) {
           comparisonsNumber++;
-          //console.log(`${this._numbersArray[j]} est du type ${typeof this._numbersArray[j]}.`);
           if (this._numbersArray[j] < this._numbersArray[j - 1]) {
             this.swap(this._numbersArray, j, j - 1);
             isSorted = false;
@@ -178,7 +176,6 @@ class Sort {
   
     qs(numbersArray, left, right, comparisonsTotalNumber) {
       let comparisonsNumber = comparisonsTotalNumber;
-      //console.log(`Init comparisonsNumber = ${comparisonsNumber} pour ${left} et ${right}`);
       if (left >= right) {
         return comparisonsNumber;
       }
@@ -192,17 +189,13 @@ class Sort {
         }
       }
       this.swap(this._numbersArray, i + 1, right);
-      //console.log(`comparisonsNumber = ${comparisonsNumber} pour ${left} et ${right}`);
       let comparisonsNumberInLeft = this.qs(numbersArray, left, i, comparisonsNumber);
-      //console.log(`comparisonsNumberInleft = ${comparisonsNumberInLeft} pour ${left} et ${i}`);
       let comparisonsNumberInRight = this.qs(numbersArray, i + 2, right, comparisonsNumberInLeft);
-      //console.log(`comparisonsNumberInRight = ${comparisonsNumberInRight} pour ${i + 2} et ${right}`);
       return comparisonsNumberInRight;
     }
   
     performThisSort() {
       let comparisonsTotalNumber = this.qs(this._numbersArray, 0, this._numbersArray.length - 1, 0);
-      //console.log(`comparisonsTotalNumber = ${comparisonsTotalNumber} pour 0 et ${this._numbersArray.length - 1}`);
       return comparisonsTotalNumber;
     }
   }
@@ -226,7 +219,6 @@ class Sort {
       let comparisonsNumber = 0;
       let arr = [];
       // Break out of loop if any one of the array gets empty
-      //console.log(`A l'appel left = [${left}] et right = [${right}]`);
       while (left !== undefined && left.length && right !== undefined && right.length) {
         // Pick the smaller among the smallest element of left and right sub arrays
         comparisonsNumber++;
@@ -239,19 +231,16 @@ class Sort {
       this._comparisonsTotalNumber += comparisonsNumber;
       // Concatenating the leftover elements
       // (in case we didn't go through the entire left or right array)
-      //console.log(`En sortie arr = [${arr}] et left = [${left}] et right = [${right}]`);
       return [ ...arr, ...left, ...right ];
     }
   
     mergeSort(numbersArray) {
       // Base case or terminating case
-      //console.log(`A l'appel numbersArray = [${numbersArray}]`);
       if (numbersArray === undefined || numbersArray.length < 2) {
         return numbersArray;
       }
       const half = numbersArray.length / 2;
       const left = numbersArray.splice(0, half);
-      //console.log(`left = [${left}] et numbersArray = [${numbersArray}]`);
       return this.merge(this.mergeSort(left), this.mergeSort(numbersArray));
     }
   
@@ -287,7 +276,6 @@ class Sort {
               } else {
                 let numbersArray = [];
                 lineData.forEach((token) => {
-                  //console.log(`${token} est du type ${typeof token}.`);
                   if (token !== undefined && token !== null && (typeof token === 'string') && !isNaN(token)) {
             if (Number.parseInt(token) == Number.parseFloat(token)) {
                       numbersArray.push(Number.parseInt(token));
